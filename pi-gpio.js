@@ -26,6 +26,12 @@ var pinMapping = {
 	"26": 7
 };
 
+var pinMapping2V512 = {
+	"3"  : 2,
+	"5"  : 3,
+	"13" : 27
+};
+
 function isNumber(number) {
 	return !isNaN(parseInt(number, 10));
 }
@@ -119,6 +125,14 @@ var gpio = {
 		value = !!value?"1":"0";
 
 		fs.writeFile(sysFsPath + "/gpio" + pinMapping[pinNumber] + "/value", value, "utf8", callback);
+	},
+
+	setPi : function(version){
+		if(version == 512){
+			for(var pin in pinMapping2V512){
+				pinMapping[pin] = pinMapping2V512[pin];
+			}
+		}
 	}
 };
 
